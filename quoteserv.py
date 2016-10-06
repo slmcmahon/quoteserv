@@ -4,6 +4,7 @@ import random
 import datetime
 import os
 import logging
+import time
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -35,6 +36,8 @@ class AddQuote(webapp2.RequestHandler):
         if author and quote_text and category:
             q = Quote(author = author, quote_text = quote_text, category = category)
             q.put()
+            
+        time.sleep(.5)
         self.redirect('/allquotes', True)
 
 class AllQuotes(webapp2.RequestHandler):
@@ -51,6 +54,7 @@ class AllQuotes(webapp2.RequestHandler):
         q.date_added = datetime.datetime.now()
         q.put()
 
+        time.sleep(.5)
         self.redirect('/allquotes', True)
 
     def get(self):
@@ -99,7 +103,7 @@ class RandomQuote(webapp2.RequestHandler):
             quote_category = 'none'
         else:
             rnd = random.randint(1, count)
-            quote = qry.fetch(offset = rnd-1)
+            quote = qry.fetch(offset = rnd-1)[0]
             quote_text = quote.quote_text
             quote_author = quote.author
             quote_category = quote.category
@@ -126,6 +130,7 @@ class DeleteQuote(webapp2.RequestHandler):
         key = ndb.Key(urlsafe=self.request.get('key'))
         key.delete()
 
+        time.sleep(.5)
         self.redirect('/allquotes', True)
 
 class Utils(object):
