@@ -106,6 +106,7 @@ class RandomQuote(webapp2.RequestHandler):
             use_xml = True
             template_name = 'quote.xml'
             content_type = 'text/xml'
+        
 
         template_values = {
             'quote_text': quote_text,
