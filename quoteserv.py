@@ -19,12 +19,6 @@ class Quote(ndb.Model):
     category = ndb.StringProperty(indexed=True)
     date_added = ndb.DateTimeProperty(auto_now_add=True)
 
-class MainPage(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        c = Quote()
-        self.response.out.write(c.show())
-
 class AddQuote(webapp2.RequestHandler):
     def post(self):
         Utils.validate_login(self, '/allquotes')
@@ -36,7 +30,7 @@ class AddQuote(webapp2.RequestHandler):
         if author and quote_text and category:
             q = Quote(author = author, quote_text = quote_text, category = category)
             q.put()
-            
+
         time.sleep(.5)
         self.redirect('/allquotes', True)
 
