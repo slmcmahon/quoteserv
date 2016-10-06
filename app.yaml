@@ -1,0 +1,19 @@
+application: quoteserv
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: false
+
+libraries:
+- name: jinja2
+  version: latest
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /forms
+  static_dir: forms
+
+- url: /.*
+  script: quoteserv.app

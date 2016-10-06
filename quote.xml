@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<quote>
+	<text>{{ quote_text }}</text>
+	<author>{{ author }}</author>
+	<category>{{ category }}</category>
+</quote>

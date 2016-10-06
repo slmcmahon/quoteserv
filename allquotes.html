@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+	</head>
+	<body>
+		<a href="/logout">Logout</a>
+        <form method="post" action="{% if key %}/allquotes{% else %}/addquote{% endif%}">
+            <table>
+                <tr>
+                    <td valign="top">Quote:</td>
+                    <td><textarea name="quote_text" cols="60" rows="5">{% if key %}{{ quote_text }}{% endif %}</textarea></td>
+                </tr>
+                <tr>
+                    <td>Author:</td>
+                    <td><input type="text" name="author"{% if key %}value="{{ author }}"{% endif %}></td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td>
+                        <select name="category">
+                            <option>Inspirational</option>
+                            <option>Change</option>
+                            <option>Success</option>
+                            <option>Zen</option>
+                            <option selected>Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="{% if key %}Save Quote{% else %}Add Quote{% endif %}"></td>
+                </tr>
+            </table>
+			{% if key %}
+				<input type="hidden" value="{{ key }}" name="key">
+			{% endif %}
+        </form>  
+		<hr/>
+		{% for quote in quotes %}
+			<p>{{ quote.quote_text }}</p>
+			<blockquote>~{{ quote.author }}</blockquote>
+			<p><a href="/allquotes?key={{ quote.key.urlsafe() }}">Edit</a> <a href="/deletequote?key={{ quote.key.urlsafe() }}">Delete</a></p>
+			<hr/>
+		{% endfor %}
+	</body>
+</html>
