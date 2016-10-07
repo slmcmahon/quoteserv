@@ -1,4 +1,5 @@
 import webapp2, jinja2, random, datetime, os, logging, time
+from google.appengine.ext import ndb
 from quote import Quote 
 from utils import Utils 
 

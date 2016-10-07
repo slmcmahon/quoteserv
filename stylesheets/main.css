@@ -9,3 +9,9 @@ h1 {
     text-decoration: underline;
 	font-style:italic;
 }
+a:link {
+	color: #FFFFFF
+}
+a:visited {
+	color: #808080
+}

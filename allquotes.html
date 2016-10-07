@@ -38,7 +38,7 @@
 		{% for quote in quotes %}
 			<p>{{ quote.quote_text }}</p>
 			<blockquote>~{{ quote.author }}</blockquote>
-			<p><a href="/allquotes?key={{ quote.key.urlsafe() }}">Edit</a> <a href="/deletequote?key={{ quote.key.urlsafe() }}">Delete</a></p>
+			<p><a href="/allquotes?key={{ quote.key.urlsafe() }}">Edit</a> | <a href="/deletequote?key={{ quote.key.urlsafe() }}">Delete</a></p>
 			<hr/>
 		{% endfor %}
 	</body>
