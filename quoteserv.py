@@ -96,8 +96,8 @@ class RandomQuote(webapp2.RequestHandler):
             quote_author = 'nobody'
             quote_category = 'none'
         else:
-            rnd = random.randint(1, count)
-            quote = qry.fetch(offset = rnd-1)[0]
+            rnd = random.SystemRandom()
+            quote = qry.fetch(offset = rnd.randint(1, count) - 1)[0]
             quote_text = quote.quote_text
             quote_author = quote.author
             quote_category = quote.category
