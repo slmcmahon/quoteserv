@@ -41,7 +41,14 @@ class AllQuotes(webapp2.RequestHandler):
         self.redirect('/allquotes', True)
 
     def get(self):
-        Utils.validate_login(self, '/allquotes')
+
+        if self.request.get('json') == 'true':
+            template_name = 'allquotes.json'
+            content_type = 'application/json'
+        else:
+            template_name = 'allquotes.html'
+            content_type = 'text/html'
+            Utils.validate_login(self, '/allquotes')
 
         quote_text = ''
         author = ''
@@ -66,13 +73,6 @@ class AllQuotes(webapp2.RequestHandler):
             'author': author,
             'category': category
         }
-
-        if self.request.get('json') == 'true':
-            template_name = 'allquotes.json'
-            content_type = 'application/json'
-        else:
-            template_name = 'allquotes.html'
-            content_type = 'text/html'
 
         template = JINJA_ENVIRONMENT.get_template(template_name)
         self.response.headers['Content-Type'] = content_type
