@@ -67,7 +67,7 @@ class AllQuotes(webapp2.RequestHandler):
             author = q.author
             category = q.category
         
-        qry = Quote.query()#.order('-date_added')
+        qry = Quote.query().order(Quote.date_added)
         quotes = qry.fetch()
 
         template_values = {
