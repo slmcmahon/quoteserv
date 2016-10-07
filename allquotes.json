@@ -1,0 +1,1 @@
+[{% for quote in quotes %}{'text':'{{ quote.quote_text }}','author':'{{ quote.author }}','category':'{{ quote.category }}'}{%- if not loop.last %},{% endif %}{% endfor %}]

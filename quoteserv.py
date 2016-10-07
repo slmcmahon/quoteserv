@@ -66,9 +66,16 @@ class AllQuotes(webapp2.RequestHandler):
             'category': category
         }
 
-        template = JINJA_ENVIRONMENT.get_template('allquotes.html')
-        self.response.write(template.render(template_values))
+        if self.request.get('json') == 'true':
+            template_name = 'allquotes.json'
+            content_type = 'application/json'
+        else:
+            template_name = 'allquotes.html'
+            content_type = 'text/html'
 
+        template = JINJA_ENVIRONMENT.get_template(template_name)
+        self.response.headers['Content-Type'] = content_type
+        self.response.write(template.render(template_values))
 
 class RandomQuote(webapp2.RequestHandler):
     def get(self):
