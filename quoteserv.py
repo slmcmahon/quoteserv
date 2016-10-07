@@ -1,23 +1,11 @@
-import webapp2
-import jinja2
-import random
-import datetime
-import os
-import logging
-import time
-from google.appengine.api import users
-from google.appengine.ext import ndb
+import webapp2, jinja2, random, datetime, os, logging, time
+from quote import Quote 
+from utils import Utils 
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-
-class Quote(ndb.Model):
-    quote_text = ndb.StringProperty(indexed=False)
-    author = ndb.StringProperty(indexed=True)
-    category = ndb.StringProperty(indexed=True)
-    date_added = ndb.DateTimeProperty(auto_now_add=True)
 
 class AddQuote(webapp2.RequestHandler):
     def post(self):
@@ -127,18 +115,7 @@ class DeleteQuote(webapp2.RequestHandler):
         time.sleep(.5)
         self.redirect('/allquotes', True)
 
-class Utils(object):
-    # sender is the class that called this.  We need this
-    # to actually do the redirect.  Maybe later I'll return the
-    # responsibility back to the caller in order to reduce the
-    # number of arguments.  don't really like this -- but still learning.
-    def validate_login(caller, uri):
-        user = users.get_current_user()
-        if not user or not users.is_current_user_admin():
-            caller.redirect(users.create_login_url(uri))
-            return
 
-    validate_login = staticmethod(validate_login)
 
 app = webapp2.WSGIApplication([
     ('/', RandomQuote),
