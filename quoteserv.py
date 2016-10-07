@@ -102,11 +102,10 @@ class RandomQuote(webapp2.RequestHandler):
             quote_author = quote.author
             quote_category = quote.category
 
-        if self.request.get('xml') == 'true':
+        if self.request.get('json') == 'true':
             use_xml = True
-            template_name = 'quote.xml'
-            content_type = 'text/xml'
-        
+            template_name = 'quote.json'
+            content_type = 'application/json'
 
         template_values = {
             'quote_text': quote_text,
