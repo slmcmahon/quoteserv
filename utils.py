@@ -2,7 +2,7 @@
 from google.appengine.api import users
 
 class Utils(object):
-    # sender is the class that called this.  We need this
+    # caller is the class that called this.  We need this
     # to actually do the redirect.  Maybe later I'll return the
     # responsibility back to the caller in order to reduce the
     # number of arguments.  don't really like this -- but still learning.

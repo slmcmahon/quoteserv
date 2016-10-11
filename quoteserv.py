@@ -80,7 +80,6 @@ class AllQuotes(webapp2.RequestHandler):
 
 class RandomQuote(webapp2.RequestHandler):
     def get(self):
-        use_xml = False
         template_name = 'quote.html'
         content_type = 'text/html'
 
@@ -99,7 +98,6 @@ class RandomQuote(webapp2.RequestHandler):
             quote_category = quote.category
 
         if self.request.get('json') == 'true':
-            use_xml = True
             template_name = 'quote.json'
             content_type = 'application/json'
 
