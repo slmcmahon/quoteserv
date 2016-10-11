@@ -20,6 +20,8 @@ class AddQuote(webapp2.RequestHandler):
             q = Quote(author = author, quote_text = quote_text, category = category)
             q.put()
 
+        # this is only needed for local development.  When running locally
+        # the async ndb action does not finish before the redirect is called
         time.sleep(.5)
         self.redirect('/allquotes', True)
 
@@ -118,10 +120,10 @@ class DeleteQuote(webapp2.RequestHandler):
         key = ndb.Key(urlsafe=self.request.get('key'))
         key.delete()
 
+        # this is only needed for local development.  When running locally
+        # the async ndb action does not finish before the redirect is called
         time.sleep(.5)
         self.redirect('/allquotes', True)
-
-
 
 app = webapp2.WSGIApplication([
     ('/', RandomQuote),
